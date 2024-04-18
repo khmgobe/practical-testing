@@ -5,9 +5,7 @@ import lombok.Getter;
 import sample.cafekiosk.api.service.product.response.ProductResponse;
 import sample.cafekiosk.spring.domain.order.Order;
 import sample.cafekiosk.spring.domain.order.OrderStatus;
-import sample.cafekiosk.spring.domain.orderproduct.OrderProduct;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

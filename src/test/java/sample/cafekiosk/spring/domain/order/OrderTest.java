@@ -14,8 +14,6 @@ import static sample.cafekiosk.spring.domain.product.SellingType.SELLING;
 
 class OrderTest {
 
-  LocalDateTime registeredDateTime = LocalDateTime.now();
-
   @DisplayName("주문 생성 시 상품 리스트에서 주문의 총 금액을 계산한다.")
   @Test
   void calculateTotalPrice() {
@@ -37,6 +35,8 @@ class OrderTest {
   @Test
   void registeredDateTime() {
 
+    LocalDateTime registeredDateTime = LocalDateTime.now();
+
     // given
     List<Product> products = List.of(
         createProduct("001", 1000),
@@ -49,8 +49,14 @@ class OrderTest {
     assertThat(order.getRegisteredDateTime()).isEqualTo(registeredDateTime);
   }
   private Product createProduct(String productNumber, int price) {
-    return Product.builder().productType(HANDMADE).productNumber(productNumber).price(price)
-        .sellingType(SELLING).name("메뉴 이름").build();
+    return Product
+        .builder()
+        .productType(HANDMADE)
+        .productNumber(productNumber)
+        .price(price)
+        .sellingType(SELLING)
+        .name("메뉴 이름")
+        .build();
   }
 
 }
