@@ -18,8 +18,8 @@ import sample.cafekiosk.spring.domain.stock.StockRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.tuple;
+
+import static org.assertj.core.api.Assertions.*;
 import static sample.cafekiosk.spring.domain.product.ProductType.*;
 import static sample.cafekiosk.spring.domain.product.SellingType.*;
 
@@ -47,6 +47,7 @@ class OrderServiceTest {
     orderProductRepository.deleteAllInBatch();
     productRepository.deleteAllInBatch();
     orderRepository.deleteAllInBatch();
+    stockRepository.deleteAllInBatch();
 
   }
 
@@ -162,6 +163,33 @@ class OrderServiceTest {
             tuple("001", 1000),
             tuple("001", 1000)
         );
+  }
+
+  @DisplayName("재고가 부족한 상품으로 주문을 생성하려는 경우 예외가 발생한다.")
+  @Test
+  void createOrderWithNoStock() {
+
+    LocalDateTime registeredDateTime = LocalDateTime.now();
+
+    // given
+    Product product = createProduct(BOTTLE, "001", 1000);
+    Product product2 = createProduct(BAKERY, "002", 3000);
+    Product product3 = createProduct(HANDMADE, "003", 5000);
+    productRepository.saveAll(List.of(product, product2, product3));
+
+    Stock stock1 = Stock.create("001", 2);
+    Stock stock2 = Stock.create("002", 2);
+    stock1.deductQuantity(1);
+    stockRepository.saveAll(List.of(stock1, stock2));
+
+    OrderCreateRequest request = OrderCreateRequest.builder()
+            .productNumbers(List.of("001", "001","002","003"))
+            .build();
+
+    // when // then
+    assertThatThrownBy(() -> orderService.createOrder(request, registeredDateTime))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("재고가 부족한 상품이 있습니다.");
   }
 
   private Product createProduct(ProductType type, String productNumber, int price) {
