@@ -9,7 +9,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import sample.cafekiosk.api.controller.order.request.OrderCreateRequest;
+import sample.cafekiosk.api.controller.order.request.OrderCreateServiceRequest;
 import sample.cafekiosk.api.service.order.OrderService;
 import java.util.List;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -33,7 +33,7 @@ class OrderControllerTest {
     void createProduct() throws Exception {
 
         //given
-        OrderCreateRequest request = OrderCreateRequest.builder()
+        OrderCreateServiceRequest request = OrderCreateServiceRequest.builder()
                 .productNumbers(List.of("001"))
                 .build();
 
@@ -53,7 +53,7 @@ class OrderControllerTest {
     void createOrderWithEmptyProductNumbers() throws Exception {
 
         //given
-        OrderCreateRequest request = OrderCreateRequest.builder()
+        OrderCreateServiceRequest request = OrderCreateServiceRequest.builder()
                 .productNumbers(List.of())
                 .build();
 

@@ -9,7 +9,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import sample.cafekiosk.api.controller.product.dto.request.ProductCreateRequest;
+import sample.cafekiosk.api.controller.product.dto.request.ProductCreateServiceRequest;
 import sample.cafekiosk.api.service.product.ProductService;
 import sample.cafekiosk.api.service.product.response.ProductResponse;
 
@@ -39,7 +39,7 @@ class ProductControllerTest {
     void createProduct() throws Exception {
 
         //given
-        ProductCreateRequest request = ProductCreateRequest.builder()
+        ProductCreateServiceRequest request = ProductCreateServiceRequest.builder()
                 .productType(HANDMADE)
                 .sellingType(SELLING)
                 .name("아메리카노")
@@ -59,7 +59,7 @@ class ProductControllerTest {
     void createProductWithoutType() throws Exception {
 
         //given
-        ProductCreateRequest request = ProductCreateRequest.builder()
+        ProductCreateServiceRequest request = ProductCreateServiceRequest.builder()
                 .sellingType(SELLING)
                 .name("아메리카노")
                 .price(4000)
@@ -82,7 +82,7 @@ class ProductControllerTest {
     void createProductWithoutSellingType() throws Exception {
 
         //given
-        ProductCreateRequest request = ProductCreateRequest.builder()
+        ProductCreateServiceRequest request = ProductCreateServiceRequest.builder()
                 .productType(HANDMADE)
                 .name("아메리카노")
                 .price(4000)
@@ -105,7 +105,7 @@ class ProductControllerTest {
     void createProductWithoutName() throws Exception {
 
         //given
-        ProductCreateRequest request = ProductCreateRequest.builder()
+        ProductCreateServiceRequest request = ProductCreateServiceRequest.builder()
                 .sellingType(SELLING)
                 .price(4000)
                 .build();
@@ -127,7 +127,7 @@ class ProductControllerTest {
     void createProductWithoutPrice() throws Exception {
 
         //given
-        ProductCreateRequest request = ProductCreateRequest.builder()
+        ProductCreateServiceRequest request = ProductCreateServiceRequest.builder()
                 .sellingType(SELLING)
                 .price(-5)
                 .build();
