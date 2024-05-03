@@ -42,6 +42,7 @@ class OrderTest {
         createProduct("001", 1000),
         createProduct("002", 2000));
 
+
     // when
     Order order = Order.create(products, registeredDateTime);
 
