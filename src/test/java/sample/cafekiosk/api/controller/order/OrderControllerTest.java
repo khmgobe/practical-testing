@@ -11,22 +11,16 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import sample.cafekiosk.api.controller.order.request.OrderCreateServiceRequest;
 import sample.cafekiosk.api.service.order.OrderService;
+import sample.cafekiosk.spring.ControllerTestSupport;
+
 import java.util.List;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(controllers = OrderController.class)
-class OrderControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+class OrderControllerTest extends ControllerTestSupport {
 
-    @Autowired
-    private ObjectMapper objectMapper;
-
-    @MockBean
-    private OrderService orderService;
 
     @Test
     @DisplayName("신규 주문을 등록한다.")

@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import sample.cafekiosk.api.controller.order.request.OrderCreateServiceRequest;
 import sample.cafekiosk.api.service.order.response.OrderResponse;
+import sample.cafekiosk.spring.IntegrationTestSupport;
 import sample.cafekiosk.spring.domain.order.OrderRepository;
 import sample.cafekiosk.spring.domain.orderproduct.OrderProductRepository;
 import sample.cafekiosk.spring.domain.product.Product;
@@ -23,9 +24,7 @@ import static org.assertj.core.api.Assertions.*;
 import static sample.cafekiosk.spring.domain.product.ProductType.*;
 import static sample.cafekiosk.spring.domain.product.SellingType.*;
 
-@ActiveProfiles("test")
-@SpringBootTest
-class OrderServiceTest {
+class OrderServiceTest extends IntegrationTestSupport {
 
   @Autowired
   private ProductRepository productRepository;

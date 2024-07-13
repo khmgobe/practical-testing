@@ -3,7 +3,7 @@ package sample.cafekiosk.api.service.product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import sample.cafekiosk.api.controller.product.dto.request.ProductCreateServiceRequest;
+import sample.cafekiosk.api.service.product.request.ProductCreateServiceRequest;
 import sample.cafekiosk.api.service.product.response.ProductResponse;
 import sample.cafekiosk.spring.domain.product.Product;
 import sample.cafekiosk.spring.domain.product.ProductRepository;

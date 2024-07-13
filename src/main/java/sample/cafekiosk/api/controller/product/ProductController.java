@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import sample.cafekiosk.api.ApiResponse;
-import sample.cafekiosk.api.controller.product.dto.request.ProductCreateServiceRequest;
 import sample.cafekiosk.api.service.product.ProductService;
+import sample.cafekiosk.api.service.product.request.ProductCreateServiceRequest;
 import sample.cafekiosk.api.service.product.response.ProductResponse;
 
 import javax.validation.Valid;

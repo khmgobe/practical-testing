@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import sample.cafekiosk.api.service.OrderStatisticsService;
 import sample.cafekiosk.client.mail.MailSendClient;
+import sample.cafekiosk.spring.IntegrationTestSupport;
 import sample.cafekiosk.spring.domain.history.mail.MailSendHistory;
 import sample.cafekiosk.spring.domain.history.mail.MailSendHistoryRepository;
 import sample.cafekiosk.spring.domain.order.Order;
@@ -26,8 +27,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static sample.cafekiosk.spring.domain.product.ProductType.*;
 import static sample.cafekiosk.spring.domain.product.SellingType.SELLING;
 
-@SpringBootTest
-class OrderStatisticsServiceTest {
+class OrderStatisticsServiceTest extends IntegrationTestSupport {
 
     @Autowired
     private OrderStatisticsService orderStatisticsService;

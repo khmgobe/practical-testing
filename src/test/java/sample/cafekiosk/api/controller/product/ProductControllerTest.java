@@ -1,20 +1,13 @@
 package sample.cafekiosk.api.controller.product;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import sample.cafekiosk.api.controller.product.dto.request.ProductCreateServiceRequest;
-import sample.cafekiosk.api.service.product.ProductService;
+import sample.cafekiosk.api.service.product.request.ProductCreateServiceRequest;
 import sample.cafekiosk.api.service.product.response.ProductResponse;
-
+import sample.cafekiosk.spring.ControllerTestSupport;
 import java.util.List;
-
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -22,17 +15,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static sample.cafekiosk.spring.domain.product.ProductType.*;
 import static sample.cafekiosk.spring.domain.product.SellingType.*;
 
-@WebMvcTest(controllers = ProductController.class)
-class ProductControllerTest {
-
-    @Autowired
-    private MockMvc mockMvc;
-
-    @MockBean
-    private ProductService productService;
-
-    @Autowired
-    private ObjectMapper objectMapper;
+class ProductControllerTest extends ControllerTestSupport {
 
     @Test
     @DisplayName("신규 상품을 등록한다.")
@@ -60,7 +43,6 @@ class ProductControllerTest {
 
         //given
         ProductCreateServiceRequest request = ProductCreateServiceRequest.builder()
-                .sellingType(SELLING)
                 .name("아메리카노")
                 .price(4000)
                 .build();
@@ -129,6 +111,8 @@ class ProductControllerTest {
         //given
         ProductCreateServiceRequest request = ProductCreateServiceRequest.builder()
                 .sellingType(SELLING)
+                .productType(HANDMADE)
+                .name("good")
                 .price(-5)
                 .build();
 
@@ -140,7 +124,7 @@ class ProductControllerTest {
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.code").value("400"))
                 .andExpect(jsonPath("$.status").value("BAD_REQUEST"))
-                .andExpect(jsonPath("$.message").value("상품 이름은 필수입니다."))
+                .andExpect(jsonPath("$.message").value("상품 가격은 양수여야 합니다."))
                 .andExpect(jsonPath("$.data").isEmpty());
     }
 
